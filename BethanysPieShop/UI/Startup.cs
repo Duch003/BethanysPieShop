@@ -17,7 +17,7 @@ namespace UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IPieRepository, MockPieRepository>();
-            
+
             services.AddMvc();
         }
 
