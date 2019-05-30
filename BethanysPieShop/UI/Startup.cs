@@ -27,7 +27,7 @@ namespace UI
             services.AddDbContext<AppDbContext>(options 
                 => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IPieRepository, PieRepository>();
-
+            services.AddTransient<IFeedbackRepositroy, FeedbackRepository>();
             services.AddMvc();
         }
 
@@ -37,7 +37,14 @@ namespace UI
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseAuthentication();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            }
+            );
         }
     }
 }

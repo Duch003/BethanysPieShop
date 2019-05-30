@@ -28,5 +28,13 @@ namespace UI.Controllers
 
             return View(homeViewModel);
         }
+
+        public IActionResult Details(int id)
+        {
+            var pie = repository.GetPieById(id);
+            if(pie is null) { return NotFound(); }
+
+            return View(pie);
+        }
     }
 }
